@@ -60,6 +60,7 @@ int main()
 	printf("End of prog: %d\n", CoP);
 	free(line);
 	free(tokens);
+	signal(SIGINT, sig_stop);
 	return (0);
 }
 
