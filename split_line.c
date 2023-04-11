@@ -16,7 +16,7 @@ char** sssh_split_line(char *line)
 	char **tokens = malloc(sizeof(char *) * capacity);
 	if (tokens == NULL)
 	{
-		perror("sssh");
+		perror("tokens memory allocation failed");
 		exit(1);
 	}
 

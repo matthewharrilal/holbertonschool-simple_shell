@@ -28,9 +28,9 @@ struct builtin {
  */
 
 struct builtin builtins[] = {
-    {"help", sssh_help},
-    {"exit", sssh_exit},
-    {"cd", sssh_cd},
+    {"help", _help},
+    {"exit", _exit},
+    {"cd", _cd},
 };
 
 void _cd(char **args);

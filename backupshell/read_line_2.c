@@ -5,7 +5,7 @@
  * Return: string pointer or error message
  */
 
-char *sssh_read_line()
+char *read_line()
 {
 	char *line = NULL;
 	size_t buflen = 0;

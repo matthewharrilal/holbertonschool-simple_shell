@@ -6,7 +6,7 @@
  * Return: always 0 (success)
  */
 
-void sssh_exec(char **args)
+void _exec(char **args)
 {
 	for (int i = 0; i < sssh_num_builtins; i++)
 	{
