@@ -18,26 +18,27 @@
  * @func: fucntion handler
  */
 
-struct builtin {
+/* struct builtin {
     char *name;
     void (*func)(char **args);
-};
+}; */
 
 /**
  * builtin builtins - array of built in commands. 
  */
 
-struct builtin builtins[] = {
+/* struct builtin builtins[] = {
     {"help", _help},
     {"exit", _exit},
     {"cd", _cd},
-};
+}; */
 
+/* Prototypes */
+char **split_line(char *str, int *count);
 void _cd(char **args);
-void _exit(char **args);
+/* void _exit(char **args);*/
 void _exec(char **args);
 int num_builtins();
 void _help(char **args);
-char** split_line(char *line);
 
 #endif

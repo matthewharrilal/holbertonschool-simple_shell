@@ -1,46 +1,47 @@
 #include "main.h"
+#define MAX_ARGS 100
 
 /**
- * sssh_split_line - Tokenize a string, splitting on whitespace
- * leading whitespace is ignored. Consecutive whitespaces are
- * treated as a single delimiter.
- * @line: string to tokenize
+ * split_string - splits a string into tokens
+ * @str: string to tokenize
+ * @count: pointer to an int to store the number of tokens
  * Return: tokenized string
  */
 
-char** sssh_split_line(char *line)
+char **split_line(char *str, int *count)
 {
-	int length = 0;
-	int capacity = 16;
+    char *token; /* pointer to a token */
+    char *words[MAX_ARGS]; /* array of tokens */
+    char **result; /* array of tokens to return */
+    int i = 0; /* loop counter */
+	int j; /* loop counter */
+	char *cmd; /* command to execute */
 
-	char **tokens = malloc(sizeof(char *) * capacity);
-	if (tokens == NULL)
-	{
-		perror("tokens memory allocation failed");
-		exit(1);
-	}
-
-	char *delimiter = " \t\r\n";
-    char *token = strok(line, delimiter)
-
-	while (token != NULL)
-	{
-        tokens[length] = token;
-        length++;
-
-		if (length >= capacity)
-		{
-			capacity = (int) (capacity * 1.5);
-			tokens = malloc(tokens, capacity * sizeof(char*));
-			if (tokens == NULL)
-			{
-				perror("sssh");
-                exit(1);
-			}
-		}
-		token = strok(NULL, delimiter);
+    token = strtok(str, " \n");
+    while (token != NULL && i < MAX_ARGS)
+    {
+        if (i == 0 && token[0] != '/')
+        {
+            cmd = malloc(strlen("/bin/") + strlen(token) + 1);
+            strcpy(cmd, "/bin/");
+            strcat(cmd, token);
+            words[i] = cmd;
+        }
+        else
+        {
+            words[i] = token;
+        }
+        i++;
+        token = strtok(NULL, " \n");
     }
-	
-	tokens[length] = NULL;
-	return (tokens);
+    *count = i;
+
+    result = malloc((i + 1) * sizeof(char*));
+    for (j = 0; j < i; j++)
+    {
+        result[j] = words[j];
+    }
+    result[i] = NULL;
+
+    return result;
 }
