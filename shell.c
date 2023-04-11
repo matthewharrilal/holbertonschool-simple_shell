@@ -5,7 +5,7 @@
  * Return: always 0 (success)
  */
 
-int main()
+int main(void)
 {
 	char *line = NULL; /* line read from stdin, matches char *command */
 	char **tokens = NULL; /* array of tokens from line, matches char **words */
@@ -75,6 +75,6 @@ int main()
     char *sigMsg = "\nWhat is dead may never die...";
 
     void(sNUM);
-    write(STDOUT_FILENO, sigMsg, _strlen(sigMsg));
+    write(STDOUT_FILENO, sigMsg, strlen(sigMsg));
     write(STDOUT_FILENO, "\n$ ", 3);
  }
