@@ -8,14 +8,13 @@
 int main()
 {
 	char *line = NULL;
-	char *token = NULL;
 	char **tokens = NULL;
 
 	while (true)
 	{
 		printf("> ");
-		char *line = sssh_read_line();
-		char **tokens = sssh_read_line();
+		char *line = read_line();
+		char **tokens = read_line();
 
 		if (tokens[0] != NULL)
 		{
@@ -25,3 +24,19 @@ int main()
 		free(line);
 	}
 }
+
+/**
+ * read_line - read a line from stdin
+ * Return: line read from stdin
+ */
+
+ int read_line()
+ {
+	char command[100];
+
+	printf("$ ");
+	fgets(command, sizeof(command), stdin);
+	printf("%s", command);
+
+	return (0);
+ }
