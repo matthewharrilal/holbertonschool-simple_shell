@@ -7,74 +7,40 @@
 
 int main(void)
 {
-	char *line = NULL; /* line read from stdin, matches char *command */
-	char **tokens = NULL; /* array of tokens from line, matches char **words */
-	size_t size = 0; /* size of line */
-	int count; /* number of words in line */
-	int i; /* loop counter */
-	int CoP; /* process id */
+	char *line = NULL;
+	char **tokens = NULL;
+	size_t size = 0;
+	int count, i, CoP;
 
 	while (true)
 	{
-		printf("Entered while loop: %d\n", CoP);
 		printf("-> ");
-		getline(&line, &size, stdin); /* read line from stdin */
-		printf("Command received: %s", line); /* print line read from stdin */
-		tokens = split_line(line, &count); /* split line into words */
+		getline(&line, &size, stdin);
+		tokens = split_line(line, &count);
 
-		for (i = 0; i < count ; i++) /* print words */
-		{
-			printf("token %d: %s\n", i, tokens[i]);
-		}
+		if (strcmp(tokens[0], "/bin/exit") == 0)
+			exit(EXIT_SUCCESS);
 
-		
-		CoP = fork();
-		printf("Forked by %d\n", CoP);
-
-		if (CoP == -1)
+		if (access(tokens[0], X_OK) == 0)
 		{
-			perror("Error");
-			return (-1);
-		}
-		else if (CoP == 0)
-		{
-			printf("Child executing.\n");
-			/*system(stringy);*/
-			if (execve(tokens[0], tokens, NULL) == -1)
-			/*if (execve(argv[0], argv, NULL) == -1)*/
+			CoP = fork();
+			if (CoP == 0)
 			{
-				perror("Error");
-				return (-1);
+				if (execve(tokens[0], tokens, NULL) == -1)
+				{
+					perror("Execve Error");
+					return (-1);
+				}
+				return (0);
 			}
-			return (0);
+				else
+					wait(NULL);
 		}
-		else
-		{
-			printf("Parent waiting.\n");
-			wait(NULL);
-			printf("Parent awakened.\n"); /*this is how you spell 'awakened'*/
+			else
+				perror("Command Error");
 		}
-		printf("Just before end of while loop: %d\n", CoP);
-	}
-
-	printf("End of prog: %d\n", CoP);
 	free(line);
 	free(tokens);
-	signal(SIGINT, sig_stop);
+	/* signal(SIGINT, sig_stop); */
 	return (0);
 }
-
-/**
- * sig_stop - stops signal
- * @sNUM: signal number
- * Returns: void
- */
-
- void sig_stop(int sNum)
- {
-    char *sigMsg = "\nWhat is dead may never die...";
-
-    void(sNUM);
-    write(STDOUT_FILENO, sigMsg, strlen(sigMsg));
-    write(STDOUT_FILENO, "\n$ ", 3);
- }

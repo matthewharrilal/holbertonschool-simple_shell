@@ -36,7 +36,6 @@
 /* Prototypes */
 char **split_line(char *str, int *count);
 void _cd(char **args);
-/* void _exit(char **args);*/
 void _exec(char **args);
 int num_builtins();
 void _help(char **args);
