@@ -33,15 +33,11 @@ struct builtin builtins[] = {
     {"cd", sssh_cd},
 };
 
-void sssh_cd(char **args);
-void sssh_exit(char **args);
-void sssh_exec(char **args);
-int sssh_num_builtins();
-void sssh_help(char **args);
-char* read_line();
-char** sssh_split_line(char *line);
-void sssh_exec(**args);
-int sssh_num_builtins();
-
+void _cd(char **args);
+void _exit(char **args);
+void _exec(char **args);
+int num_builtins();
+void _help(char **args);
+char** split_line(char *line);
 
 #endif

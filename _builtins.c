@@ -1,12 +1,12 @@
 #include "main.h"
 
 /**
- * sssh_help - print a list of available builtins
+ * _help - print a list of available builtins
  * @args: list of builtins
  * Return: always 0 (success)
  */
 
-void sssh_help(char **args)
+void _help(char **args)
 {
     char *helptext =
         "sssh - The Super Simple Shell. "
@@ -18,12 +18,12 @@ void sssh_help(char **args)
 }
 
 /**
- * sssh_cd - change the current directory
+ * _cd - change the current directory
  * @args: list of arguments
  * Return: always 0 (success)
  */
 
-int sssh_cd(char **args)
+int _cd(char **args)
 {
     if (args[1] == NULL)
     {
@@ -39,22 +39,22 @@ int sssh_cd(char **args)
 }
 
 /**
- * sssh_exit - exit the shell
+ * _exit - exit the shell
  * @args: list of arguments
  * Return: always 0 (success)
  */
 
-void sssh_exit(char **args)
+void _exit(char **args)
 {
     exit(0);
 }
 
 /**
- * sssh_num_builtins - 
+ * _num_builtins - 
  * Return: number of registered commands
  */
 
-int sssh_num_builtins()
+int num_builtins()
 {
 	return sizeof(builtins) / sizeof(struct bultin);
 }
