@@ -40,5 +40,6 @@ void _cd(char **args);
 void _exec(char **args);
 int num_builtins();
 void _help(char **args);
+void sig_stop(int sNum);
 
 #endif

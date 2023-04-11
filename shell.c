@@ -62,3 +62,18 @@ int main()
 	free(tokens);
 	return (0);
 }
+
+/**
+ * sig_stop - stops signal
+ * @sNUM: signal number
+ * Returns: void
+ */
+
+ void sig_stop(int sNum)
+ {
+    char *sigMsg = "\nWhat is dead may never die...";
+
+    void(sNUM);
+    write(STDOUT_FILENO, sigMsg, _strlen(sigMsg));
+    write(STDOUT_FILENO, "\n$ ", 3);
+ }
