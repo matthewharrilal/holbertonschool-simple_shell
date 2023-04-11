@@ -12,32 +12,10 @@
 #include <string.h>
 #include <sys/stat.h>
 
-/**
- * struct builtin - associates a command name with a handler function
- * @name: function name
- * @func: fucntion handler
- */
-
-/* struct builtin {
-    char *name;
-    void (*func)(char **args);
-}; */
-
-/**
- * builtin builtins - array of built in commands. 
- */
-
-/* struct builtin builtins[] = {
-    {"help", _help},
-    {"exit", _exit},
-    {"cd", _cd},
-}; */
-
-/* Prototypes */
 char **split_line(char *str, int *count);
 void _cd(char **args);
 void _exec(char **args);
-int num_builtins();
+int num_builtins(void);
 void _help(char **args);
 void sig_stop(int sNum);
 
