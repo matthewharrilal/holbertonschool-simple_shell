@@ -1,7 +1,5 @@
 #include "shell.h"
 
-void sig_stop(int sNum);
-
 /**
  * main - entry point
  * Return: always 0 (success)
@@ -12,17 +10,29 @@ int main(void)
 	char *line = NULL;
 	char **tokens = NULL;
 	size_t size = 0;
-	int count, CoP;
+	int count;
+	int CoP = 777;
 
 	while (true)
 	{
 		printf("-> ");
-		getline(&line, &size, stdin);
-		tokens = split_line(line, &count);
+		if (getline(&line, &size, stdin) == -1)
+		{
+			printf("\n");
+			free(line);
+			exit(EXIT_SUCCESS);
+		}
+		if (line[0] == '\n')
+			continue;
+		else
+			tokens = split_line(line, &count);
 
 		if (strcmp(tokens[0], "/bin/exit") == 0)
+		{
+			free(line);
+			free(tokens);
 			exit(EXIT_SUCCESS);
-
+		}
 		if (access(tokens[0], X_OK) == 0)
 		{
 			CoP = fork();
@@ -40,22 +50,6 @@ int main(void)
 		}
 			else
 				perror("Command Error");
+		free(tokens);
 	}
-	free(line);
-	free(tokens);
-	signal(SIGINT, sig_stop);
-	return (0);
-}
-/**
- *sig_stop - stoooooopp
- *@sNum: its a number
- *Return: nuthin
- */
-void sig_stop(int sNum)
-{
-	char *sigMsg = "\nYou shell not pass!";
-
-	(void)sNum;
-	write(STDOUT_FILENO, sigMsg, strlen(sigMsg));
-	write(STDOUT_FILENO, "\n$ ", 3);
 }

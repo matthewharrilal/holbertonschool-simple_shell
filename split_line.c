@@ -43,5 +43,8 @@ char **split_line(char *str, int *count)
 	}
 	result[i] = NULL;
 
+	if (i == 0 && token[0] != '/')
+		free(cmd);
+
 	return (result);
 }
