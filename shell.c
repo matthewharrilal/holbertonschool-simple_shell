@@ -41,8 +41,12 @@ int main(void)
 				if (execve(tokens[0], tokens, NULL) == -1)
 				{
 					perror("Execve Error");
+					free(line);
+					free(tokens);
 					return (-1);
 				}
+				free(line);
+				free(tokens);
 				return (0);
 			}
 				else
