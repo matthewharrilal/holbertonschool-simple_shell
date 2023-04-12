@@ -1,4 +1,4 @@
-#include "main.h"
+#include "shell.h"
 
 void sig_stop(int sNum);
 
@@ -12,7 +12,7 @@ int main(void)
 	char *line = NULL;
 	char **tokens = NULL;
 	size_t size = 0;
-	int count, i, CoP;
+	int count, CoP;
 
 	while (true)
 	{
