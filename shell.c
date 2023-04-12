@@ -1,10 +1,11 @@
 #include "main.h"
 
+void sig_stop(int sNum);
+
 /**
  * main - entry point
  * Return: always 0 (success)
  */
-void sig_stop(int sNum);
 
 int main(void)
 {
@@ -39,7 +40,7 @@ int main(void)
 		}
 			else
 				perror("Command Error");
-		}
+	}
 	free(line);
 	free(tokens);
 	signal(SIGINT, sig_stop);
