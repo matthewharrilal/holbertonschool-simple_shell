@@ -26,7 +26,6 @@ char **split_line(char *str, int *count)
 			if (cmd == NULL)
 			{
 				perror("malloc error");
-				free(cmd);
 				exit(EXIT_FAILURE);
 			}
 			strcpy(cmd, "/bin/");
@@ -37,7 +36,6 @@ char **split_line(char *str, int *count)
 		{
 			words[i] = token;
 		}
-		
 		i++;
 		token = strtok(NULL, " \n");
 	}
@@ -54,6 +52,7 @@ char **split_line(char *str, int *count)
 		result[j] = words[j];
 	}
 	result[i] = NULL;
+	free(cmd);
 
 	/* if (cmd != NULL && i == 0 && token[0] != '/') */
 		/* free(cmd); */
