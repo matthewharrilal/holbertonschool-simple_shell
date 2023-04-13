@@ -10,13 +10,12 @@ int main(void)
 	char *line = NULL;
 	char **tokens = NULL;
 	size_t size = 0;
-	int count;
-	int CoP = 777;
+	int count, CoP = 777;
 	char *path = NULL;
-    char *paths[20];
+	char *paths[20];
 
 	path = getenv("PATH");
-    tokenize_path(path, paths);
+	tokenize_path(path, paths);
 
 	while (true)
 	{
@@ -32,7 +31,6 @@ int main(void)
 			continue;
 		else
 			tokens = split_line(line, &count);
-
 		if (strcmp(tokens[0], "/bin/exit") == 0)
 		{
 			free(line);
