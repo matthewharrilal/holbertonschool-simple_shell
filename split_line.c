@@ -15,7 +15,7 @@ char **split_line(char *str, int *count)
 	char **result; /* array of tokens to return */
 	int i = 0; /* loop counter */
 	int j; /* loop counter */
-	char *cmd = NULL; /* command to execute */
+	char *cmd; /* command to execute */
 
 	token = strtok(str, " \n");
 	while (token != NULL && i < MAX_ARGS)
@@ -52,10 +52,10 @@ char **split_line(char *str, int *count)
 		result[j] = words[j];
 	}
 	result[i] = NULL;
-	free(cmd);
 
-	/* if (cmd != NULL && i == 0 && token[0] != '/') */
-		/* free(cmd); */
-
+	if (j == 0 && words[j][0] != '/')
+	{
+		free(cmd);
+	}
 	return (result);
 }
