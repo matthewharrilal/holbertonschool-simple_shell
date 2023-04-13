@@ -26,12 +26,12 @@ char **split_line(char *str, int *count)
 			if (cmd == NULL)
 			{
 				perror("malloc error");
+				free(cmd);
 				exit(EXIT_FAILURE);
 			}
 			strcpy(cmd, "/bin/");
 			strcat(cmd, token);
 			words[i] = cmd;
-			free(cmd);
 		}
 		else
 		{
