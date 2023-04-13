@@ -10,12 +10,9 @@
 
 char **split_line(char *str, int *count)
 {
-	char *token; /* pointer to a token */
-	char **words = malloc(MAX_ARGS * sizeof(char *)); /* array of tokens */
-	char **result; /* array of tokens to return */
-	int i = 0; /* loop counter */
-	int j; /* loop counter */
-	char *cmd; /* command to execute */
+	char *token, *cmd = NULL, *words[MAX_ARGS];
+	char **result; /* token array */
+	int i = 0, j; /* loop counters */
 
 	token = strtok(str, " \n");
 	while (token != NULL && i < MAX_ARGS)
@@ -26,6 +23,7 @@ char **split_line(char *str, int *count)
 			if (cmd == NULL)
 			{
 				perror("malloc error");
+				free(cmd);
 				exit(EXIT_FAILURE);
 			}
 			strcpy(cmd, "/bin/");
@@ -33,9 +31,8 @@ char **split_line(char *str, int *count)
 			words[i] = cmd;
 		}
 		else
-		{
 			words[i] = token;
-		}
+
 		i++;
 		token = strtok(NULL, " \n");
 	}
@@ -54,8 +51,7 @@ char **split_line(char *str, int *count)
 	result[i] = NULL;
 
 	if (j == 0 && words[j][0] != '/')
-	{
 		free(cmd);
-	}
+		
 	return (result);
 }
