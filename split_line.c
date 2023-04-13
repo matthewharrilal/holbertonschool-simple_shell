@@ -11,7 +11,7 @@
 char **split_line(char *str, int *count)
 {
 	char *token, *cmd = NULL, *words[MAX_ARGS];
-	char **result; /* token array */
+	char **result;
 	int i = 0, j; /* loop counters */
 
 	token = strtok(str, " \n");
