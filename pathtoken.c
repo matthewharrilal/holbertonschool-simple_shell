@@ -259,7 +259,6 @@ void tokenize_path(char *path, char **paths)
 	while (path_token != NULL)
 	{
 		paths[i] = path_token;
-		printf("%s\n", paths[i]);
 		i++;
 		path_token = tokstr(NULL, ":", &saveptr);
 	}

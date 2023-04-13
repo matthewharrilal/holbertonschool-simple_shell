@@ -37,6 +37,7 @@ char **split_line(char *str, int *count)
 		{
 			words[i] = token;
 		}
+		
 		i++;
 		token = strtok(NULL, " \n");
 	}
@@ -54,8 +55,8 @@ char **split_line(char *str, int *count)
 	}
 	result[i] = NULL;
 
-	if (cmd != NULL && i == 0 && token[0] != '/')
-		free(cmd);
+	/* if (cmd != NULL && i == 0 && token[0] != '/') */
+		/* free(cmd); */
 
 	return (result);
 }
