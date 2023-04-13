@@ -31,6 +31,7 @@ char **split_line(char *str, int *count)
 			strcpy(cmd, "/bin/");
 			strcat(cmd, token);
 			words[i] = cmd;
+			free(cmd);
 		}
 		else
 		{

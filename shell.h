@@ -18,5 +18,16 @@ void _exec(char **args);
 int num_builtins(void);
 void _help(char **args);
 void sig_stop(int sNum);
+char *tokstr(char *str, const char *delim, char **saveptr);
+unsigned int _strspn(char *s, const char *accept);
+char *_strchr(const char *s, char c);
+char *_strpbrk(char *s, const char *accept);
+int cleanstr(char *line);
+char *_strcat(char *dest, char *src);
+char *_strcpy(char *dest, char *src);
+int _strlen(char *s);
+int _strncmp(char *s1, char *s2, int n);
+int _strcmp(char *s1, char *s2);
+void tokenize_path(char *path, char **paths);
 
 #endif

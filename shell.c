@@ -12,13 +12,19 @@ int main(void)
 	size_t size = 0;
 	int count;
 	int CoP = 777;
+	char *path = NULL;
+    char *paths[20];
+
+	path = getenv("PATH");
+    tokenize_path(path, paths);
 
 	while (true)
 	{
-		printf("-> ");
+		if (isatty(STDIN_FILENO))
+			write(STDOUT_FILENO, "$ ", 2);
+
 		if (getline(&line, &size, stdin) == -1)
 		{
-			printf("\n");
 			free(line);
 			exit(EXIT_SUCCESS);
 		}
