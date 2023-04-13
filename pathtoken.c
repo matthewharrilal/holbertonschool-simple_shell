@@ -133,12 +133,6 @@ int cleanstr(char *line)
     }
     return (0);
 }
-char *_strcat(char *dest, char *src);
-char *_strcpy(char *dest, char *src);
-int _strlen(char *s);
-int _strncmp(char *s1, char *s2, int n);
-int _strcmp(char *s1, char *s2);
-
 /**
  * *_strcat - meows 2 strings together
  * @dest: where big string goes and other smol string comes
@@ -265,6 +259,7 @@ void tokenize_path(char *path, char **paths)
     while (path_token != NULL)
     {
         paths[i] = path_token;
+        printf("%s\n", paths[i]);
         i++;
         path_token = tokstr(NULL, ":", &saveptr);
     }
