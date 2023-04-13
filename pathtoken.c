@@ -9,29 +9,29 @@
  */
 char *tokstr(char *str, const char *delim, char **saveptr)
 {
-    char *token;
+	char *token;
 
-    if (str == NULL)
-    {
-        str = *saveptr;
-    }
-    str += _strspn(str, delim);
-    if (*str == '\0')
-    {
-        return (NULL);
-    }
-    token = str;
-    str = _strpbrk(token, delim);
-    if (str == NULL)
-    {
-        *saveptr = _strchr(token, '\0');
-    }
-    else
-    {
-        *str = '\0';
-        *saveptr = str + 1;
-    }
-    return (token);
+	if (str == NULL)
+	{
+		str = *saveptr;
+	}
+	str += _strspn(str, delim);
+	if (*str == '\0')
+	{
+		return (NULL);
+	}
+	token = str;
+	str = _strpbrk(token, delim);
+	if (str == NULL)
+	{
+		*saveptr = _strchr(token, '\0');
+	}
+	else
+	{
+		*str = '\0';
+		*saveptr = str + 1;
+	}
+	return (token);
 }
 /**
  * _strspn - calculates byte overlap
@@ -41,23 +41,23 @@ char *tokstr(char *str, const char *delim, char **saveptr)
  */
 unsigned int _strspn(char *s, const char *accept)
 {
-    unsigned int bCount = 0;
-    int i = 0, j = 0;
+	unsigned int bCount = 0;
+	int i = 0, j = 0;
 
-    while (accept[i])
-    {
-        j = 0;
-        while ((s[j] >= 'a' && s[j] <= 'z') || (s[j] >= 'A' && s[j] <= 'Z'))
-        {
-            if (s[j] == accept[i])
-            {
-                bCount++;
-            }
-            j++;
-        }
-        i++;
-    }
-    return (bCount);
+	while (accept[i])
+	{
+		j = 0;
+		while ((s[j] >= 'a' && s[j] <= 'z') || (s[j] >= 'A' && s[j] <= 'Z'))
+		{
+			if (s[j] == accept[i])
+			{
+				bCount++;
+			}
+			j++;
+		}
+		i++;
+	}
+	return (bCount);
 }
 
 /**
@@ -68,19 +68,19 @@ unsigned int _strspn(char *s, const char *accept)
  */
 char *_strchr(const char *s, char c)
 {
-    while (*s != '\0')
-    {
-        if (*s == c)
-        {
-            return ((char *) s);
-        }
-        s++;
-    }
-    if (c == '\0')
-    {
-        return ((char *) s);
-    }
-    return (NULL);
+	while (*s != '\0')
+	{
+		if (*s == c)
+		{
+			return ((char *) s);
+		}
+		s++;
+	}
+	if (c == '\0')
+	{
+		return ((char *) s);
+	}
+	return (NULL);
 }
 
 /**
@@ -91,27 +91,27 @@ char *_strchr(const char *s, char c)
  */
 char *_strpbrk(char *s, const char *accept)
 {
-    int i = 0, j = 0, offset = 999;
+	int i = 0, j = 0, offset = 999;
 
-    while (accept[i])
-    {
-        j = 0;
-        while (s[j])
-        {
-            if (s[j] == accept[i])
-            {
-                if (j < offset)
-                {
-                    offset = j;
-                }
-            }
-            j++;
-        }
-        i++;
-    }
-    if (offset == 999)
-        return (NULL);
-    return (s + offset);
+	while (accept[i])
+	{
+		j = 0;
+		while (s[j])
+		{
+			if (s[j] == accept[i])
+			{
+				if (j < offset)
+				{
+					offset = j;
+				}
+			}
+			j++;
+		}
+		i++;
+	}
+	if (offset == 999)
+		return (NULL);
+	return (s + offset);
 }
 
 /**
@@ -121,17 +121,17 @@ char *_strpbrk(char *s, const char *accept)
  */
 int cleanstr(char *line)
 {
-    int i = 0;
+	int i = 0;
 
-    while (line[i])
-    {
-        if (line[i] == '\n')
-        {
-            line[i] = '\0';
-        }
-        i++;
-    }
-    return (0);
+	while (line[i])
+	{
+		if (line[i] == '\n')
+		{
+			line[i] = '\0';
+		}
+		i++;
+	}
+	return (0);
 }
 /**
  * *_strcat - meows 2 strings together
@@ -141,20 +141,20 @@ int cleanstr(char *line)
  */
 char *_strcat(char *dest, char *src)
 {
-    int i = 0, j = 0;
+	int i = 0, j = 0;
 
-    while (dest[i])
-    {
-        i++;
-    }
-    while (src[j])
-    {
-        dest[i] = src[j];
-        i++;
-        j++;
-    }
-    dest[i] = '\0';
-    return (dest);
+	while (dest[i])
+	{
+		i++;
+	}
+	while (src[j])
+	{
+		dest[i] = src[j];
+		i++;
+		j++;
+	}
+	dest[i] = '\0';
+	return (dest);
 }
 
 /**
@@ -165,15 +165,15 @@ char *_strcat(char *dest, char *src)
  */
 char *_strcpy(char *dest, char *src)
 {
-    int a = 0;
+	int a = 0;
 
-    while (*(src + a))
-    {
-        *(dest + a) = *(src + a);
-        a++;
-    }
-    dest[a] = '\0';
-    return (dest);
+	while (*(src + a))
+	{
+		*(dest + a) = *(src + a);
+		a++;
+	}
+	dest[a] = '\0';
+	return (dest);
 }
 
 /**
@@ -183,13 +183,13 @@ char *_strcpy(char *dest, char *src)
  */
 int _strlen(char *s)
 {
-    int a = 0;
+	int a = 0;
 
-    while (*(s + a) != '\0')
-    {
-        a++;
-    }
-    return (a);
+	while (*(s + a) != '\0')
+	{
+		a++;
+	}
+	return (a);
 }
 
 /**
@@ -201,22 +201,22 @@ int _strlen(char *s)
  */
 int _strncmp(char *s1, char *s2, int n)
 {
-    int i = 0, dif = 0;
+	int i = 0, dif = 0;
 
-    while (s1[i] && s2[i] && (i < n))
-    {
-        if (s1[i] == s2[i])
-        {
-            i++;
-            continue;
-        }
-        else
-        {
-            dif = s1[i] - s2[i];
-            break;
-        }
-    }
-    return (dif);
+	while (s1[i] && s2[i] && (i < n))
+	{
+		if (s1[i] == s2[i])
+		{
+			i++;
+			continue;
+		}
+		else
+		{
+			dif = s1[i] - s2[i];
+			break;
+		}
+	}
+	return (dif);
 }
 
 /**
@@ -227,22 +227,22 @@ int _strncmp(char *s1, char *s2, int n)
  */
 int _strcmp(char *s1, char *s2)
 {
-    int i = 0, dif = 0;
+	int i = 0, dif = 0;
 
-    while (s1[i] && s2[i])
-    {
-        if (s1[i] == s2[i])
-        {
-            i++;
-            continue;
-        }
-        else
-        {
-            dif = s1[i] - s2[i];
-            break;
-        }
-    }
-    return (dif);
+	while (s1[i] && s2[i])
+	{
+		if (s1[i] == s2[i])
+		{
+			i++;
+			continue;
+		}
+		else
+		{
+			dif = s1[i] - s2[i];
+			break;
+		}
+	}
+	return (dif);
 }
 /**
  * tokenize_path - tokenize user's PATH variable
@@ -252,16 +252,16 @@ int _strcmp(char *s1, char *s2)
  */
 void tokenize_path(char *path, char **paths)
 {
-    char *saveptr;
-    char *path_token = tokstr(path, ":", &saveptr);
-    int i = 0;
+	char *saveptr;
+	char *path_token = tokstr(path, ":", &saveptr);
+	int i = 0;
 
-    while (path_token != NULL)
-    {
-        paths[i] = path_token;
-        printf("%s\n", paths[i]);
-        i++;
-        path_token = tokstr(NULL, ":", &saveptr);
-    }
-    paths[i] = NULL;
+	while (path_token != NULL)
+	{
+		paths[i] = path_token;
+		printf("%s\n", paths[i]);
+		i++;
+		path_token = tokstr(NULL, ":", &saveptr);
+	}
+	paths[i] = NULL;
 }
