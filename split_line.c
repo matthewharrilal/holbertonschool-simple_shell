@@ -11,7 +11,7 @@
 char **split_line(char *str, int *count)
 {
 	char *token; /* pointer to a token */
-	char *words[MAX_ARGS]; /* array of tokens */
+	char **words = malloc(MAX_ARGS * sizeof(char *)); /* array of tokens */
 	char **result; /* array of tokens to return */
 	int i = 0; /* loop counter */
 	int j; /* loop counter */
