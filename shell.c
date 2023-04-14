@@ -1,4 +1,5 @@
 #include "shell.h"
+char *tokens[20];
 
 /**
  * main - entry point
@@ -8,15 +9,9 @@
 int main(void)
 {
 	char *line = NULL;
-	char **tokens = NULL;
 	size_t size = 0;
-	int count, CoP = 777;
-	char *path = NULL;
-	char *paths[20];
-
-	path = getenv("PATH");
-	tokenize_path(path, paths);
-
+	char *delims = " \t\n";
+	
 	while (true)
 	{
 		if (isatty(STDIN_FILENO))
@@ -27,37 +22,24 @@ int main(void)
 			free(line);
 			exit(EXIT_SUCCESS);
 		}
-		if (line[0] == '\n')
+		tokenize_path_the_sequel(line, delims, tokens);
+		if (!tokens[0])
 			continue;
-		else
-			tokens = split_line(line, &count);
-		if (strcmp(tokens[0], "exit") == 0)
+		if (_strcmp(tokens[0], "env") == 0)   
+            continue;
+		if (_strcmp(tokens[0], "exit") == 0)
 		{
 			free(line);
-			free(tokens);
 			exit(EXIT_SUCCESS);
 		}
 		if (access(tokens[0], X_OK) == 0)
 		{
-			CoP = fork();
-			if (CoP == 0)
-			{
-				if (execve(tokens[0], tokens, NULL) == -1)
-				{
-					perror("Execve Error");
-					free(line);
-					free(tokens);
-					return (-1);
-				}
-				free(line);
-				free(tokens);
-				return (0);
-			}
-				else
-					wait(NULL);
+			make_a_baby(tokens[0], tokens);
 		}
-			else
-				perror("Command Error");
-		free(tokens);
+		else
+		{
+			path_finder(tokens);
+		}
 	}
+	return (0);
 }

@@ -12,6 +12,8 @@
 #include <string.h>
 #include <sys/stat.h>
 
+extern char *tokens[20];
+
 char **split_line(char *str, int *count);
 void _cd(char **args);
 void _exec(char **args);
@@ -29,5 +31,8 @@ int _strlen(char *s);
 int _strncmp(char *s1, char *s2, int n);
 int _strcmp(char *s1, char *s2);
 void tokenize_path(char *path, char **paths);
+int make_a_baby(char *comp_path, char **tokens);
+void path_finder(char **tokens);
+void **tokenize_path_the_sequel(char *line, char *delims, char **tokens);
 
 #endif
