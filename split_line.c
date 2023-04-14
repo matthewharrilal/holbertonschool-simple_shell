@@ -1,13 +1,11 @@
 #include "shell.h"
 #define MAX_ARGS 100
-
 /**
  * split_line - splits a string into tokens
  * @str: string to tokenize
  * @count: pointer to an int to store the number of tokens
  * Return: tokenized string
  */
-
 char **split_line(char *str, int *count)
 {
 	char *token, *cmd = NULL, *words[MAX_ARGS];
@@ -52,6 +50,6 @@ char **split_line(char *str, int *count)
 
 	if (j == 0 && words[j][0] != '/')
 		free(cmd);
-		
+
 	return (result);
 }
