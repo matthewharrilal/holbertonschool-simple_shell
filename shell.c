@@ -31,7 +31,7 @@ int main(void)
 			continue;
 		else
 			tokens = split_line(line, &count);
-		if (strcmp(tokens[0], "/bin/exit") == 0)
+		if (strcmp(tokens[0], "exit") == 0)
 		{
 			free(line);
 			free(tokens);
