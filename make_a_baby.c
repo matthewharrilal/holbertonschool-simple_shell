@@ -9,27 +9,27 @@
 
 int make_a_baby(char *comp_path, char **tokens)
 {
-    pid_t pid, CoP;
-    int status = 0;
+	pid_t pid, CoP;
+	int status = 0;
 
-    pid = fork();
-    if (pid == 0)
-    {
-        if (execve(comp_path, tokens, NULL) == -1)
-        {
-            exit(EXIT_FAILURE);
-        }
-    }
-    else if (pid < 0)
-    {
-        exit(EXIT_FAILURE);
-    }
-    else
-    {
-        do {
-            CoP = waitpid(pid, &status, WUNTRACED);
-        } while (!WIFEXITED(status) && !WIFSIGNALED(status));
-    }
-    (void) CoP;
-    return (status);
+	pid = fork();
+	if (pid == 0)
+	{
+		if (execve(comp_path, tokens, NULL) == -1)
+		{
+			exit(EXIT_FAILURE);
+		}
+	}
+	else if (pid < 0)
+	{
+		exit(EXIT_FAILURE);
+	}
+	else
+	{
+		do {
+			CoP = waitpid(pid, &status, WUNTRACED);
+		} while (!WIFEXITED(status) && !WIFSIGNALED(status));
+	}
+	(void) CoP;
+	return (status);
 }

@@ -50,7 +50,10 @@ int main(int argc, char *argv[])
 			exit(EXIT_SUCCESS);
 		}
 		else if (_strcmp(args[0], "env") == 0)
+		{
+			free(path);
 			continue;
+		}
 		if (access(args[0], X_OK) == 0)
 			make_a_baby(args[0], args);
 		else
