@@ -8,10 +8,11 @@
  */
 int main(int argc, char *argv[])
 {
-	char *comsave = NULL, *prompt = NULL, *path = NULL, *token = NULL, *comp_path = NULL;
+	char *comsave = NULL, *prompt = NULL, *path = NULL, *token = NULL;
 	char line[LINE_CAP], *args[40], *paths[40], *pname = argv[0];
 	ssize_t nread;
 	int i = 0;
+	char *comp_path = NULL;
 
 	prompt = "$ ";
 	while (1)
