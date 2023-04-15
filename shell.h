@@ -30,5 +30,6 @@ void tokenize_path(char *path, char **paths);
 int make_a_baby(char *comp_path, char **tokens);
 int path_finder(char **tokens);
 void tokenize_path_the_sequel(char *line, char *delims, char **tokens);
+void path_sweeper(char *path);
 
 #endif

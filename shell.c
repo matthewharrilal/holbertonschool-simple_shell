@@ -8,11 +8,10 @@
  */
 int main(int argc, char *argv[])
 {
-	char *comsave = NULL, *prompt = NULL, *path = NULL, *token = NULL;
+	char *comsave = NULL, *prompt = NULL, *path = NULL, *token = NULL, *comp_path = NULL;
 	char line[LINE_CAP], *args[40], *paths[40], *pname = argv[0];
 	ssize_t nread;
 	int i = 0;
-	char *comp_path = NULL;
 
 	prompt = "$ ";
 	while (1)
@@ -23,15 +22,11 @@ int main(int argc, char *argv[])
 			write(STDOUT_FILENO, prompt, _strlen(prompt));
 		nread = read(STDIN_FILENO, line, LINE_CAP);
 		if (nread == -1)
-		{
-			free(path);
-			exit(EXIT_FAILURE);
-		}
+		    path_sweeper(path);
+
 		else if (nread == 0)
-		{
-			free(path);
-			exit(EXIT_SUCCESS);
-		}
+		    path_sweeper(path);
+
 		line[nread] = '\0';
 		token = tokstr(line, DELIMS, &comsave);
 		if (token[0] == '\0')
@@ -45,10 +40,8 @@ int main(int argc, char *argv[])
 		}
 		args[i] = NULL;
 		if (_strcmp(args[0], "exit") == 0)
-		{
-			free(path);
-			exit(EXIT_SUCCESS);
-		}
+		    path_sweeper(path);
+
 		else if (_strcmp(args[0], "env") == 0)
 		{
 			free(path);
