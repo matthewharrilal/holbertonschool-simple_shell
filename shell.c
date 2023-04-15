@@ -1,5 +1,7 @@
 #include "shell.h"
 
+extern char **environ;
+
 /**
  * main - Entry point for ghost
  * @argc: arg count
@@ -9,10 +11,11 @@
 int main(int argc, char *argv[])
 {
 	char *comsave = NULL, *prompt = NULL, *path = NULL, *token = NULL;
-	char line[LINE_CAP], *args[40], *paths[40], *pname = argv[0];
-	ssize_t nread;
-	int i = 0;
+	char *line = NULL, *args[40], *paths[40], *pname = argv[0], *env = NULL;
+	size_t nread = 0;
+	int i = 0, j = 0;
 	char *comp_path = NULL;
+	struct stat x;
 
 	prompt = "$ ";
 	while (1)
@@ -21,18 +24,20 @@ int main(int argc, char *argv[])
 		tokenize_path(path, paths);
 		if (isatty(STDIN_FILENO))
 			write(STDOUT_FILENO, prompt, _strlen(prompt));
-		nread = read(STDIN_FILENO, line, LINE_CAP);
-		if (nread == -1)
-		    path_sweeper(path);
-
-		else if (nread == 0)
-		    path_sweeper(path);
-
-		line[nread] = '\0';
+		if (getline(&line, &nread, stdin) < 0)
+		{
+			free(line);
+			free(path);
+			exit(EXIT_SUCCESS);
+		}
+		cleanstr(line);
 		token = tokstr(line, DELIMS, &comsave);
-		if (token[0] == '\0')
+		if (!token[0])
+		{
+			free(path);
 			continue;
-		i = 0;
+		}
+		 i = 0;
 		while (token != NULL)
 		{
 			args[i] = token;
@@ -41,10 +46,19 @@ int main(int argc, char *argv[])
 		}
 		args[i] = NULL;
 		if (_strcmp(args[0], "exit") == 0)
-		    path_sweeper(path);
-
+		{
+			free(line);
+			free(path);
+			exit(EXIT_SUCCESS);
+		}
 		else if (_strcmp(args[0], "env") == 0)
 		{
+			for (j = 0; environ[j]; j++)
+			{
+				env = environ[j];
+				write(STDOUT_FILENO, env, _strlen(env));
+				write(STDOUT_FILENO, "\n", 1);
+			}
 			free(path);
 			continue;
 		}
@@ -59,7 +73,7 @@ int main(int argc, char *argv[])
 				_strcpy(comp_path, paths[i]);
 				_strcat(comp_path, "/");
 				_strcat(comp_path, args[0]);
-				if (access(comp_path, X_OK) == 0)
+				if (stat(comp_path, &x) == 0)
 				{
 					make_a_baby(comp_path, args);
 					free(comp_path);
