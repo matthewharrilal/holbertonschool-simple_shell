@@ -72,11 +72,11 @@ char *_strpbrk(char *s, const char *accept)
  */
 void tokenize_path(char *path, char **paths)
 {
-	char *saveptr;
+	char *saveptr = NULL;
 	char *path_token = tokstr(path, ":", &saveptr);
 	int i = 0;
 
-	while (path_token != NULL)
+	while (path_token != NULL && i < 20)
 	{
 		paths[i] = path_token;
 		i++;
