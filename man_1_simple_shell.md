@@ -9,7 +9,7 @@ date: April 7, 2023
 **Simple Shell** - a simple UNIX command interpreter in C for Holberton School
 
 # SYNOPSIS
-hsh [OPTIONS] [FILE]
+simple_shell \[OPTIONS\] \[FILE\]
 
 # DESCRIPTION
 The program is a simple shell that runs bash commands entered by the user from the input stream. Each command is a sequence of non-blank words separated by a space, where the first word specifies the name of the command to be executed and subsequent words are considered arguments or flags associated with the command.
@@ -17,8 +17,9 @@ The program is a simple shell that runs bash commands entered by the user from t
 The shell can read input lines interactively from standard output or non-interactively from a piped file. It is designed to behave like a UNIX shell, but it does not support all bash features and options.
 
 # OPTIONS
-This simple shell program will not ______________________, in accordance with the rubric for Holberton School Course PP1300.
-
+    hsh is the name of the executable that allows the user to enter interactive mode. 
+    
+    
     -c, --command=STRING
         Execute the given command STRING and exit.
     -h, --help
@@ -36,14 +37,19 @@ If a file is provided, the simple shell will execute the commands in the file an
     env:
         Prints the variables from the current environment.
 
-# RETURN VALUE
-A successful execution of _printf will return the number of characters printed. An error will return -1.
+# EXIT STATUS
+The exit status of hsh indicates the success or failure of the previously executed command. If no command is executed, the exit status is 0. 
 
 # EXAMPLES
-    To run a command using myshell:
-        $ myshell -c "ls -l | grep *.txt"
-    To run a script file using myshell:
-        $ myshell script.sh
+    To run a command in Interactive Mode:
+        $ ./hsh
+        $ ls
+        hsh main.c shell.c
+        $ exit
+    
+    To run a script file in Non-interactive mode:
+        $ echo "/bin/ls" | ./hsh
+        hsh main.c shell.c
 
 # AUTHORS
 Written by Sarah Markland & Tayler Coon
