@@ -69,13 +69,13 @@ unsigned int _strspn(char *s, const char *accept)
 
 /**
  * path_sweeper - free's the path and exit failure
- * path: path to be freed
+ * @path: path to be freed
  * Return: always 0
  */
 
- void path_sweeper(char *path)
- {
+void path_sweeper(char *path, char *path)
+{
+	free(line);
 	free(path);
 	exit(EXIT_FAILURE);
- }
- 
+}
