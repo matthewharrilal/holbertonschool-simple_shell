@@ -53,6 +53,6 @@ dkms.conf
 
 # holbertonschool-low_level_programming
 deploy.sh
-.swp
-.md
+*.swp
+*.md
 vgcore.*
