@@ -31,6 +31,11 @@ int main(int argc, char *argv[])
 			exit(EXIT_SUCCESS);
 		}
 		cleanstr(line);
+		if (line[0] == '\0')
+		{
+			free(path);
+			continue;
+		}
 		token = tokstr(line, DELIMS, &comsave);
 		if (!token[0])
 		{
@@ -51,7 +56,7 @@ int main(int argc, char *argv[])
 			free(path);
 			exit(EXIT_SUCCESS);
 		}
-		else if (_strcmp(args[0], "env") == 0)
+		if (_strcmp(args[0], "env") == 0)
 		{
 			for (j = 0; environ[j]; j++)
 			{

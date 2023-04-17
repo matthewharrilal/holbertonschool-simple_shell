@@ -13,7 +13,7 @@
 #include <sys/stat.h>
 
 #define LINE_CAP 1024
-#define DELIMS " \t\r\n\a"
+#define DELIMS " \t\n\a"
 
 void sig_stop(int sNum);
 char *tokstr(char *str, const char *delim, char **saveptr);

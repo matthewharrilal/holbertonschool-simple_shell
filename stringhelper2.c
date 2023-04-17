@@ -30,6 +30,8 @@ int cleanstr(char *line)
 {
 	int i = 0;
 
+	if (line == NULL || (line[0] == '\n' && line[1] == '\0'))
+		    return (-1);
 	while (line[i])
 	{
 		if (line[i] == '\n')
