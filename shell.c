@@ -9,6 +9,85 @@ void no_more_betty(void);
  * @env: array of env strings
  * Return: Always 0. Exit status differs.
  */
+
+#define BUFFER_SIZE 1024
+
+void prompt(void)
+{
+    printf("($) ");
+}
+
+int main(void)
+{
+    char *buffer;
+    size_t bufsize;
+    ssize_t characters;
+    pid_t pid;
+    char *args[2];
+
+    buffer = NULL;
+    bufsize = 0;
+    while (1)
+    {
+
+        prompt();
+
+        /* Read command from user */
+        characters = getline(&buffer, &bufsize, stdin);
+
+        /* Check for end of file (Ctrl+D) */
+	if (characters == EOF)
+	{
+		printf("User has exited out the system");
+		break;
+	}
+
+        /* Remove newline character */
+        if (buffer[characters - 1] == '\n')
+            buffer[characters - 1] = '\0';
+
+        /* Fork a child process */
+        pid = fork();
+
+        if (pid == -1)
+        {
+            perror("fork");
+            exit(EXIT_FAILURE);
+        }
+
+        if (pid == 0)
+        {
+            /* Child process */
+	    args[0] = buffer;
+            args[1] = NULL;
+            execve(buffer, args, NULL);
+
+            /* If execve fails */
+            perror(buffer);
+            exit(EXIT_FAILURE);
+        }
+        else
+        {
+            /* Parent process */
+            int status;
+            waitpid(pid, &status, 0);
+
+            if (WIFEXITED(status) && WEXITSTATUS(status) == 127)
+            {
+                /* Command not found */
+                fprintf(stderr, "./hsh: %lu: %s: not found\n", (unsigned long)getpid(), buffer);
+            }
+        }
+    }
+
+    /* Free allocated memory */
+    free(buffer);
+
+    return 0;
+}
+
+
+/*
 int main(int argc, char **argv, char **env)
 {
 	char *line = NULL, *path = NULL;
@@ -72,13 +151,6 @@ int main(int argc, char **argv, char **env)
 	}
 	return (ret_val);
 }
-/**
- * tokenize_string - tokenize a string
- * @line: string to tokenize
- * @delims: delimiter string
- * @tokens: array to save tokens
- * Return: void
- */
 void tokenize_string(char *line, char *delims, char **tokens)
 {
 	char *path_token = strtok(line, delims);
@@ -92,13 +164,6 @@ void tokenize_string(char *line, char *delims, char **tokens)
 	}
 	tokens[i] = NULL;
 }
-/**
-* check_path - checks if command is in path
-* @path: path string
-* @patharr: array of path strings
-* @args: array of input arg strings
-* Return: 0 on success, 1 on failure
-*/
 int check_path(char *path, char **patharr, char **args)
 {
 	int i = 0;
@@ -124,13 +189,6 @@ int check_path(char *path, char **patharr, char **args)
 }
 
 
-/**
- * make_a_baby - creates a child process
- * @stdpath: path string
- * @call_path: path to executable
- * @str_arr: array of tokens
- * Return: status of child process
- */
 
 int make_a_baby(char *stdpath, char *call_path, char **str_arr)
 {
@@ -158,11 +216,6 @@ int make_a_baby(char *stdpath, char *call_path, char **str_arr)
 	(void) sig;
 	return (status);
 }
-/**
- * *_strdup - ret ptr to newly allocated mem space
- * @str: string
- * Return: NULL or ptr to dupe string
- */
 char *_strdup(char *str)
 {
 	int i = 0;
@@ -193,3 +246,4 @@ char *_strdup(char *str)
 
 	return (ar);
 }
+*/
